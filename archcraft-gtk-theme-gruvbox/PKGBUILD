@@ -1,0 +1,25 @@
+# Maintainer: Aditya Shakya <adi1090x@gmail.com>
+
+pkgname=archcraft-gtk-theme-gruvbox
+pkgver=1.0
+pkgrel=1
+pkgdesc="Gruvbox gtk theme for Archcraft"
+url="https://github.com/archcraft-os/archcraft-themes"
+arch=('any')
+license=('GPL3')
+makedepends=()
+depends=()
+conflicts=()
+groups=(archcraft-themes)
+provides=("${pkgname}")
+options=(!strip !emptydirs)
+
+prepare() {
+	cp -af ../files/. ${srcdir}
+}
+
+package() {
+	local _themesdir=${pkgdir}/usr/share/themes
+	mkdir -p "$_themesdir"
+	cp -r ${srcdir}/* "$_themesdir"
+}
