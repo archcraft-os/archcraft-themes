@@ -2,7 +2,7 @@
 
 pkgname=archcraft-gtk-theme-manhattan
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Manhattan gtk theme for Archcraft"
 url="https://github.com/archcraft-os/archcraft-themes"
 arch=('any')
