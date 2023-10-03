@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Slime
+Comment=A White Material Design theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Slime
+MetacityTheme=Slime
+IconTheme=Luv-Folders-Dark
+CursorTheme=Qogirr-dark
+CursorSize=16

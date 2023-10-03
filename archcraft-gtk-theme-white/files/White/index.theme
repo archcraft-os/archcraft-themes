@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=White
+Comment=A Material Design theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=White
+MetacityTheme=White
+IconTheme=Arc-Circle
+CursorTheme=Fluent-dark
+CursorSize=16

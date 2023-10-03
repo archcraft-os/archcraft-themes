@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Everforest
+Comment=An Flat Gtk+ theme based on Elegant Design
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Everforest
+MetacityTheme=Everforest
+IconTheme=Everforest
+CursorTheme=Qogirr
+ButtonLayout=close,minimize,maximize:menu
