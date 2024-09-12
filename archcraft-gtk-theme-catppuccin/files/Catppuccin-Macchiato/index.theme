@@ -8,5 +8,5 @@ Encoding=UTF-8
 GtkTheme=Catppuccin-Macchiato
 MetacityTheme=Catppuccin-Macchiato
 IconTheme=Tela-circle-Dark
-CursorTheme=Catppuccin-cursors
+CursorTheme=Macchiato-cursors
 ButtonLayout=close,minimize,maximize:menu

@@ -11,8 +11,6 @@ $_bubble_borders_color: transparentize($osd_fg_color,0.8);
 $_shell_fg_color: $fg_color;
 
 stage {
-  font-family: $font-family;
-  @include fontsize($font-size);
   color: $fg_color;
 }
 
@@ -66,7 +64,7 @@ stage {
 // Entries
 //
 %entry {
-  padding: 7px;
+  padding: 5px;
   caret-size: 1px;
   selection-background-color: $selected_bg_color;
   selected-color: $selected_fg_color;
@@ -147,19 +145,18 @@ StScrollBar {
 //
 .popup-slider-menu-item,
 .slider {
-  -slider-height: 4px;
-  -slider-background-color: $button_border;                   //background of the trough
-  -slider-border-color: transparentize(black, 1);             //trough border color
-  -slider-active-background-color: $selected_bg_color;        //active trough fill
-  -slider-active-border-color: transparentize(black, 1);      //active trough border
-  -slider-border-width: 0;
-  -slider-handle-radius: 4px;
-  height: 18px;
+  -slider-height: 0.3em;
+  -slider-background-color: lighten($base_color, 5%);               //background of the trough
+  -slider-border-color: transparentize($bg_color, 0.7);             //trough border color
+  -slider-active-background-color: $selected_bg_color;              //active trough fill
+  -slider-active-border-color: transparentize($bg_color, 0.7);      //active trough border
+  -slider-border-width: 1px;
+  -slider-handle-radius: 0.5em;
+  height: 1em;
   min-width: 15em;
   border: 0 solid transparent;
   border-right-width: 1px;
   border-left-width: 5px;
-  color: transparent;
 
   .popup-menu-item:active & {
     -slider-background-color: transparentize(black, 0.8);
@@ -271,14 +268,30 @@ StScrollBar {
 .popup-menu,
 %menu {
   color: $fg_color;
-  border-image: url("#{$asset_path}/menu/menu.svg") 9 9 9 9;
+  border: 1px solid $borders_color;
+  border-radius: 6px;
+	background-color: transparentize($bg_color, 0.01);
 
+  &.top {
+    border-radius: 0 0 6px 6px;
+  }
+
+  &.bottom {
+    border-radius: 6px 6px 0 0;
+  }
+
+  &.left {
+    border-radius: 0 6px 6px 0;
+  }
+
+  &.right {
+    border-radius: 6px 0 0 6px;
+  }
   &-arrow { icon-size: 16px; }
 
   .popup-sub-menu {
-    background-gradient-direction: none;
     box-shadow: none;
-    border-image: url("#{$asset_path}/menu/submenu.svg") 9 9 9 9;
+    background-color: $base_color;
 
     .popup-menu-item:ltr { padding-right: 0em; }
     .popup-menu-item:rtl { padding-left: 0em; }
@@ -293,11 +306,14 @@ StScrollBar {
   .popup-menu-item {
     padding: .4em 1.75em;
     spacing: 1em;
-
+    // border: 1px solid transparent;
+    border-left-width: 0;
+    border-right-width: 0;
+  
     &:active {
       color: $selected_fg_color;
-      background-color: transparent;
-      border-image: url("common-assets/menu/menu-hover.svg") 9 9 1 1;
+      // border-color: transparentize($fg_color, 0.89);
+      background-color: $selected_bg_color;
     }
     &:insensitive {
       color: transparentize($fg_color, 0.5);
@@ -355,7 +371,6 @@ StScrollBar {
 // Panel
 //
 #panel {
-  font-size: 10pt; 
   height: 28px; 
   width: 32px; 
   font-weight: 700; 
@@ -631,9 +646,175 @@ StScrollBar {
 // Calendar 
 //
 .calendar {
-  padding: .4em 1.75em;
-  spacing-rows: 0px;
-  spacing-columns: 0px;
+  spacing-rows: 0;
+  spacing-columns: 0;
+}
+
+.calendar-main-box {
+  margin: 0 .8em .5em .8em;
+}
+
+.calendar-events-main-box {
+  height: 300px;
+  margin-right: .5em;
+  padding: .5em;
+  min-width: 350px;
+  border: 1px solid $borders_color;
+  background-color: $base_color;
+}
+
+.calendar-events-no-events-box {
+}
+
+.calendar-events-no-events-button {
+  margin: 6px 0 6px 0;
+  padding: 6px;
+
+  &:hover {
+    background-color: $selected_bg_color;
+
+    .calendar-events-no-events-icon,
+    .calendar-events-no-events-label {
+      color: $selected_fg_color;
+    }
+  }
+}
+
+.calendar-events-no-events-icon,
+.calendar-events-no-events-label {
+  font-weight: bold;
+  color: $fg_color;
+  text-align: center;
+}
+
+.calendar-events-date-label {
+  padding: .1em .1em .5em .1em;
+  color: $fg_color;
+  font-weight: bold;
+  text-align: center;
+}
+
+.calendar-events-event-container {
+  padding: 0;
+}
+
+.calendar-event-button {
+  border: 1px solid rgba(0,0,0,0);
+
+  .calendar-event-time-past {
+    color: transparentize($fg_color, 0.6);
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: .2em;
+  }
+  .calendar-event-time-present {
+    color: $fg_color;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: .2em;
+
+    &:all-day {
+      color: $selected_bg_color;
+    }
+  }
+  .calendar-event-time-future {
+    color: $fg_color;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: .2em;
+  }
+
+  .calendar-event-summary {
+    color: $fg_color;
+    text-align: left;
+    width: 200px;
+  }
+
+  .calendar-event-countdown {
+    text-align: right;
+    margin-bottom: .6em;
+    color: $fg_color;
+
+    &:soon {
+      font-weight: bold;
+    }
+    &:imminent {
+      font-weight: bold;
+      color: $warning_color;
+    }
+    &:current {
+      font-weight: bold;
+      color: $selected_bg_color;
+    }
+  }
+
+  &:hover {
+    background-color: $selected_bg_color;
+    border: 1px solid $borders_color;
+    .calendar-event-time-past,
+    .calendar-event-time-present,
+    .calendar-event-time-future,
+    .calendar-event-summary {
+      color: $selected_fg_color
+    }
+
+    .calendar-event-countdown {
+      text-align: right;
+      margin-bottom: .6em;
+      color: $selected_fg_color;
+
+      &:soon {
+        font-weight: bold;
+      }
+      &:imminent {
+        font-weight: bold;
+      }
+      &:current {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.calendar-event-row-content {
+}
+
+.calendar-event-color-strip {
+  width: 2px;
+}
+
+.calendar-today-home-button {
+  padding: 6px;
+}
+
+.calendar-today-day-label {
+  font-size: 1.75em;
+  color: $fg_color;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: .1em;
+}
+
+.calendar-today-date-label {
+  font-size: 1.1em;
+  color: $fg_color;
+  font-weight: bold;
+  text-align: center;
+}
+
+.calendar-today-home-button-enabled {
+  padding: 6px;
+
+  &:hover {
+    background-color: $selected_bg_color;
+
+    .calendar-today-day-label {
+      color: $selected_fg_color
+    }
+    .calendar-today-date-label {
+      color: $selected-fg-color
+    }
+  }
 }
 
 .calendar-month-label {
@@ -682,33 +863,41 @@ StScrollBar {
   }
 }
 
-.datemenu-date-label {
-  padding: .4em 1.75em;
-  font-weight: bold;
-  text-align: center;
-  color: $fg_color;
+.calendar-day-event-dot-box {
+  margin-top: 1.7em;
+  max-rows: 1;
+}
+
+.calendar-day-event-dot {
+  margin: 1px;
   border-radius: 2px;
+  width: 4px;
+  height: 4px;
 }
 
 .calendar-day-base {
-  font-size: 80%;
+  font-size: 1em;
   text-align: center;
-  width: 25px;
-  height: 25px;
+  width: 2.2em;
+  height: 2.2em;
   padding: 0.1em;
-  margin: 2px;
-  border-radius: 12.5px;
+
+  &:hover {
+    font-weight: bold;
+    color: $selected_fg_color;
+    background-color: $selected_bg_color;
+  }
 }
 
 .calendar-day-heading {
   color: transparentize($fg_color, 0.15);
   margin-top: 1em;
-  font-size: 70%;
+  font-size: 1.05em;
 }
 
 .calendar-day {
   border-width: 0;
-  color: transparentize($fg_color, 0.2);
+  color: transparentize($fg_color, 0.1);
 }
 
 .calendar-day-top {
@@ -725,14 +914,28 @@ StScrollBar {
   font-weight: bold;
 }
 
-.calendar-today,
-.calendar-today:active,
-.calendar-today:focus,
-.calendar-today:hover {
-  font-weight: bold;
-  color: $selected_fg_color;
-  background-color: $selected_bg_color;
+.calendar-today {
+  color: $fg_color;
+  background-color: if($variant == 'light', transparentize($selected_bg_color, 0.1), transparentize($selected_bg_color, 0.1));
   border-width: 0;
+
+  &:selected {
+    font-weight: bold;
+  }
+}
+
+.calendar-not-today {
+  color: $fg_color;
+
+  &:selected {
+    font-weight: bold;
+    background-color: if($variant == 'light', transparentize($fg_color, 0.7), transparentize($fg_color, 0.6));
+
+    &:hover {
+      font-weight: bold;
+      color: $fg_color;
+    }
+  }
 }
 
 .calendar-other-month-day {
@@ -740,11 +943,16 @@ StScrollBar {
   opacity: 1;
 }
 
-.calendar-week-number {
-  color: transparentize($fg_color, 0.3);
-  font-size: 80%;
+.calendar-other-month-day:hover {
+  color: $selected_fg_color;
+  opacity: 1;
 }
 
+.calendar-week-number {
+  color: transparentize($fg_color, 0.15);
+  font-size: 0.8em;
+  margin-top: 0.8em;
+}
 //
 // Notifications
 //
@@ -1191,7 +1399,7 @@ StScrollBar {
 
 #menu-search-entry {
   width: 250px;
-  height: 15px;
+  min-height: 15px;
   font-weight: normal;
   caret-color: $fg_color;
 
@@ -1254,139 +1462,147 @@ StScrollBar {
 
 .window-list {
   &-box {
-    spacing: 0;
+    spacing: 6px;
+    padding-left: 10px;
+    padding-top: 1px;
 
-    .panel-top,
-    .panel-bottom & {
-      &:ltr { padding: 0 0 0 8px; }
-      &:rtl { padding: 0 8px 0 0; }
+    &.vertical {
+      spacing: 2px;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
-    &.vertical { padding: 6px 0 0 0; }
+    &:highlight {
+      background-color: transparentize($error_color, 0.5);
+    }
+  }
 
-    &:highlight { background-color: $selected_bg_color }
+  &-item-label {
+    font-weight: bold;
+    width: 15em;
+    min-width: 5px;
   }
 
   &-item-box {
-    border: 0 none transparent;
-    border-image: none;
+    font-weight: bold;
     background-image: none;
-    background-color: $panel_bg;
-    color: $osd_fg_color;
-    box-shadow: none;
-    font-weight: 400;
-    
-    &:hover {
-      color: $selected_fg_color;
-      @each $position, $_indicator in (top, 0 2px),
-                                      (bottom, 0 -2px),
-                                      (left, 2px 0),
-                                      (right, -2px 0) {
-        .panel-#{$position} & {
-          box-shadow: inset #{$_indicator} $selected_bg_color;
-        }
-      }
+    padding-top: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    transition-duration: 100;
+    color: transparentize($selected_fg_color, 0.4);
 
+    &.top,
+    &.bottom {
+      border-bottom-width: 2px;
+
+      & StLabel { padding-left: 2px; }
     }
+
+    &.right {
+      padding-left: 0px;
+      padding-right: 0px;
+      border-right-width: 2px;
+
+      & StBin { padding-right: 0; }
+    }
+
+    &.left {
+      padding-left: 0px;
+      padding-right: 0px;
+      border-left-width: 2px;
+
+      & StBin { padding-left: 1px; }
+    }
+
+    &:hover,
+    &:groupFocus {
+      color: $selected_fg_color;
+      background-color: transparentize($panel_fg, 0.9);
+    }
+
     &:active,
     &:checked,
-    &:focus {
-      &, &:hover {
-        color: $selected_fg_color;
-
-        @each $position, $_indicator in (top, 0 2px),
-                                        (bottom, 0 -2px),
-                                        (left, 2px 0),
-                                        (right, -2px 0) {
-          .panel-#{$position} & {
-            box-shadow: inset #{$_indicator} $red;
-          }
-        }
-      }
+    &:focus,
+    &:running {
+      color: $selected_fg_color;
+      border-color: $purple;
+      background-color: transparentize($panel_fg, 0.9);
     }
 
-    StIcon,
-    StBin {
-      .panel-top &,
-      .panel-bottom & { padding: 0 (6px - 2px); }
-    }
-
-    &.vertical StIcon,
-    &.vertical StBin { padding: 0; }
-
-    StLabel {
-      font-weight: 400;
-
-      .panel-top &,
-      .panel-bottom & {
-        &:ltr { padding: 0 (6px - 2px) 0 0; }
-        &:rtl { padding: 0 0 0 (6px - 2px); }
-      }
-    }
-
-    &:progress,
-    .progress {
-      background-gradient-start: $selected_bg_color;
-      background-gradient-end: $selected_bg_color;
+    & .progress {
+      background-color: transparentize($selected_bg_color, 0.1);
     }
   }
 
   &-item-demands-attention {
-    background-gradient-start: $selected_bg_color;
-    background-gradient-end: $selected_bg_color;
-    color: $selected_fg_color;
-
-    @each $position, $_indicator in (top, 0 2px),
-                                    (bottom, 0 -2px),
-                                    (left, 2px 0),
-                                    (right, -2px 0) {
-      .panel-#{$position} & {
-        box-shadow: inset #{$_indicator} $selected_bg_color;
-      }
-    }
+    background-gradient-direction: vertical;
+    background-gradient-start: $destructive_color;
+    background-gradient-end: $destructive_color;
   }
 
-  
-
-  // >= 3.6.7
-  &-preview { // thumbnail popup windows = .switcher-list
-    padding: 20px - 8px; // = .switcher-list - .item-box
-    spacing: 8px; // = .switcher-list-item-container
-    border: none;
-    border-image: url("assets/misc/osd.svg") 9 9 9 9;
-    border-radius: 2px;
-    color: $osd_fg_color;
-    background: none;
+  &-preview {
+    spacing: 6px;
+    color: $fg_color;
+    border: 1px solid $borders_color;
+    background-color: $bg_color;
+    border-radius: 3px;
+    padding: 6px 12px 12px 12px;
+    font-size: 1em;
   }
 }
 
+//
+// Grouped window list
+//
 
 .grouped-window-list {
+
+  &-item-label {
+    font-weight: bold;
+    width: 15em;
+    min-width: 5px;
+  }
+
   &-item-box {
-    border: 0 none transparent;
-    border-image: none;
+    text-align: left;
+    font-weight: bold;
     background-image: none;
-    background-color: $panel_bg;
-    color: $osd_fg_color;
-    box-shadow: none;
-    font-weight: 400;
-    
-    StIcon,
-    StBin {
-      .panel-top &,
-      .panel-bottom & { padding: 0 (6px - 2px); }
+    padding-top: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    transition-duration: 100;
+    color: transparentize($selected_fg_color, 0.4);
+
+    &.top,
+    &.bottom {
+      border-bottom-width: 2px;
+
+      & StLabel { padding-left: 2px; }
+    }
+
+    &.right {
+      padding-left: 0px;
+      padding-right: 0px;
+      border-right-width: 2px;
+
+      & StBin { padding-right: 0; }
+    }
+
+    &.left {
+      padding-left: 0px;
+      padding-right: 0px;
+      border-left-width: 2px;
+
+      & StBin { padding-left: 1px; }
     }
 
     &:active,
     &:checked {
-          @each $position, $_indicator in (top, 0 2px),
-                                        (bottom, 0 -2px),
-                                        (left, 2px 0),
-                                        (right, -2px 0) {
-          .panel-#{$position} & {
-            box-shadow: inset #{$_indicator} lighten($panel_bg, 20%);
-          }
-        }
+      color: $selected_fg_color;
+      border-color: lighten($panel_bg, 30%);
     }
 
     &:hover,
@@ -1395,40 +1611,78 @@ StScrollBar {
     &:active:focus,
     &:focus:hover,
     &:active:focus:hover {
-        @each $position, $_indicator in (top, 0 2px),
-                                        (bottom, 0 -2px),
-                                        (left, 2px 0),
-                                        (right, -2px 0) {
-          .panel-#{$position} & {
-            box-shadow: inset #{$_indicator} $purple;
-          }
-        }
+      color: $selected_fg_color;
+      border-color: $purple;
     }
 
-
-    &:progress,
-    .progress {
-      background-gradient-start: $selected_bg_color;
-      background-gradient-end: $selected_bg_color;
+    & .progress {
+      background-color: transparentize($selected_bg_color, 0.2);
     }
   }
 
   &-item-demands-attention {
-    background-gradient-start: $selected_bg_color;
-    background-gradient-end: $selected_bg_color;
-    color: $selected_fg_color;
-
-    @each $position, $_indicator in (top, 0 2px),
-                                    (bottom, 0 -2px),
-                                    (left, 2px 0),
-                                    (right, -2px 0) {
-      .panel-#{$position} & {
-        box-shadow: inset #{$_indicator} $selected_bg_color;
-      }
-    }
+    background-gradient-direction: vertical;
+    background-gradient-start: $destructive_color;
+    background-gradient-end: $destructive_color;
   }
 
+  &-thumbnail-label {
+    padding-left: 4px;
+  }
+
+  &-number-label {
+    z-index: 99;
+    color: $fg_color;
+  }
+
+  &-badge {
+    border-radius: 256px;
+    background-color: $panel_bg;
+  }
+
+  &-button-label {
+    padding-left: 4px;
+  }
+
+  &-thumbnail-alert {
+    background: rgba(255,52,52,0.3);
+  }
+
+  &-thumbnail-menu {
+    color: $fg_color;
+    border: 1px solid $borders_color;
+    background-color: $bg_color;
+    border-radius: 3px;
+    padding: 0px;
+
+    > StBoxLayout {
+      padding: 4px;
+    }
+
+    .item-box {
+      padding: 10px;
+      border-radius: 2px;
+      spacing: 4px;
+
+      &:outlined {
+        padding: 8px;
+        border: 1px solid $selected_bg_color;
+      }
+
+      &:selected {
+        border: 1px solid $selected_bg_color;
+      }
+    }
+
+    .thumbnail { width: 256px; }
+
+    .separator {
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+  }
 }
+
 ///
 // Sound Applet (status/volume.js)
 //
@@ -1568,13 +1822,13 @@ StScrollBar {
 .workspace-button {
   width: 20px;
   height: 10px;
-  color: $selected_fg_color;
+  color: $fg_color;
   padding: 3px;
   padding-top: 4px;
   transition-duration: 300;
 
-  &:outlined, &:outlined:hover { color: $selected_bg_color; }
-  &:hover { color: transparentize($selected_bg_color, 0.5) }
+  &:outlined, &:outlined:hover { color: $purple; }
+  &:hover { color: transparentize($purple, 0.5) }
 }
 
 /* Controls the style when using the "Visual representation" option */
@@ -1611,31 +1865,32 @@ StScrollBar {
 //
 // Panel Launchers Applet (panelLaunchers.js)
 //
-#panel-launchers-box {
+.panel-launchers {
   padding-left: 7px;
+  spacing: 2px;
+
+  & .launcher {
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    // border-bottom-width: 1px;
+    transition-duration: 200;
+    &:hover { background-color: transparentize($panel_fg, 0.9); }
+  }
 
   &.vertical {
-    padding: 2px 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left:0px;
+    padding-right: 0px;
+    spacing: 1px;
+
+    & .launcher {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
   }
 }
-
-.panel-launcher,
-.launcher {
-  margin: 1px;
-  padding: 1px;
-  transition-duration: 200;
-
-  &:hover {
-    background-gradient-direction: none;
-    border: 0px solid $selected_bg_color;
-
-    .panel-bottom & { border-bottom-width: 1px; }
-    .panel-top & { border-top-width: 1px; }
-    .panel-left & { border-left-width: 1px; padding-left: 0; }
-    .panel-right & { border-right-width: 1px; padding-right: 0; }
-  }
-}
-
 //
 // Overview corner
 //
@@ -1761,7 +2016,7 @@ StScrollBar {
   }
   &-drag-placeholder { 
     border: 2px solid $selected_bg_color;
-    background-color: transparentize($selected_bg_color, 0.7);
+    background-color: transparentize($selected_bg_color, 0.2);
   }
 }
 
@@ -1795,7 +2050,7 @@ StScrollBar {
 //
 .tile-preview, .tile-preview.snap,
 .tile-hud, .tile-hud.snap {
-  background-color: transparentize($selected_bg_color, 0.7);
+  background-color: transparentize($selected_bg_color, 0.2);
   border: 1px solid $selected_bg_color;
 }
 

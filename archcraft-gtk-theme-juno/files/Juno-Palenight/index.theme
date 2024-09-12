@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Juno-Palenight
+Comment=GTK themes inspired by epic vscode themes
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Juno-Palenight
+MetacityTheme=Juno-Palenight
+IconTheme=Zafiro-icons
+ButtonLayout=:minimize,maximize,close

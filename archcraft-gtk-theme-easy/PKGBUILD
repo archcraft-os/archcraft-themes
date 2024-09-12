@@ -2,7 +2,7 @@
 
 pkgname=archcraft-gtk-theme-easy
 pkgver=1.0
-pkgrel=6
+pkgrel=7
 pkgdesc="Gtk theme for Easy Mode in Archcraft"
 arch=('any')
 url="https://github.com/archcraft-os/archcraft-themes"

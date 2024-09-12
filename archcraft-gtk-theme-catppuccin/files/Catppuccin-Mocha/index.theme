@@ -8,5 +8,5 @@ Encoding=UTF-8
 GtkTheme=Catppuccin-Mocha
 MetacityTheme=Catppuccin-Mocha
 IconTheme=Tela-circle-Dark
-CursorTheme=Catppuccin-cursors
+CursorTheme=Mocha-cursors
 ButtonLayout=close,minimize,maximize:menu

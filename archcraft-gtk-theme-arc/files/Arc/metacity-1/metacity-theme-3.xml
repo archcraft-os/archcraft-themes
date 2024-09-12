@@ -10,6 +10,8 @@
 
 <!-- meaningfull constants -->
 
+<constant name="C_border_radius" value="2" />
+
 <constant name="C_title_focused" value="gtk:custom(wm_title,#70788d)" />
 <constant name="C_title_unfocused" value="gtk:custom(wm_unfocused_title,#979dac)" />
 
@@ -36,24 +38,24 @@
 <constant name="C_icon_bg_focused" value="gtk:custom(wm_icon_bg,#90949E)" />
 <constant name="C_icon_bg_unfocused" value="gtk:custom(wm_icon_unfocused_bg,#B6B8C0)" />
 <constant name="C_icon_bg_hover" value="gtk:custom(wm_icon_hover_bg,#7A7F8B)" />
-<constant name="C_icon_bg_active" value="gtk:custom(wm_icon_active_bg,#ffffff)" />
+<constant name="C_icon_bg_active" value="gtk:custom(wm_icon_active_bg,#5294e2)" />
 
 <!-- geometries -->
 
-<frame_geometry name="normal" title_scale="medium" rounded_top_left="1" rounded_top_right="1">
+<frame_geometry name="normal" title_scale="medium" rounded_top_left="C_border_radius" rounded_top_right="C_border_radius">
 	<distance name="left_width" value="0" />
 	<distance name="right_width" value="0" />
 	<distance name="bottom_height" value="0" />
 	<distance name="left_titlebar_edge" value="2"/>
 	<distance name="right_titlebar_edge" value="2"/>
-	<distance name="title_vertical_pad" value="3"/>
-	<border name="title_border" left="10" right="10" top="3" bottom="3"/>
-	<border name="button_border" left="0" right="0" top="0" bottom="0"/>
+	<distance name="title_vertical_pad" value="6"/>
+	<border name="title_border" left="10" right="10" top="0" bottom="0"/>
+	<border name="button_border" left="0" right="0" top="6" bottom="6"/>
   <distance name="button_width" value="30"/>
   <distance name="button_height" value="16"/>
 </frame_geometry>
 
-<frame_geometry name="normal_unfocused" title_scale="medium" rounded_top_left="1" rounded_top_right="1" parent="normal">
+<frame_geometry name="normal_unfocused" title_scale="medium" rounded_top_left="C_border_radius" rounded_top_right="C_border_radius" parent="normal">
 </frame_geometry>
 
 <frame_geometry name="max" title_scale="medium" parent="normal" rounded_top_left="false" rounded_top_right="false">
@@ -61,22 +63,22 @@
 	<distance name="right_width" value="0" />
 	<distance name="left_titlebar_edge" value="0"/>
 	<distance name="right_titlebar_edge" value="0"/>
-	<distance name="title_vertical_pad" value="2"/> <!-- 
+	<distance name="title_vertical_pad" value="5"/> <!-- 
 							This needs to be 1 less then the
 							title_vertical_pad on normal state
 							or you'll have bigger buttons		-->
 	<distance name="bottom_height" value="0" />
 </frame_geometry>
 
-<frame_geometry name="tiled_left" title_scale="medium" rounded_top_left="false" rounded_top_right="1" parent="normal">
+<frame_geometry name="tiled_left" title_scale="medium" rounded_top_left="false" rounded_top_right="false" parent="normal">
 	<distance name="right_width" value="0" />
 </frame_geometry>
 
-<frame_geometry name="tiled_right" title_scale="medium" rounded_top_left="1" rounded_top_right="false" parent="normal">
+<frame_geometry name="tiled_right" title_scale="medium" rounded_top_left="false" rounded_top_right="false" parent="normal">
 	<distance name="left_width" value="0" />
 </frame_geometry>
 
-<frame_geometry name="small" title_scale="small" parent="normal" rounded_top_left="1" rounded_top_right="1">
+<frame_geometry name="small" title_scale="small" parent="normal" rounded_top_left="C_border_radius" rounded_top_right="C_border_radius">
 	<distance name="title_vertical_pad" value="7"/>
 	<distance name="left_titlebar_edge" value="1"/>
 	<distance name="right_titlebar_edge" value="1"/>
@@ -91,6 +93,7 @@
 	<distance name="right_width" value="1" />
 	<distance name="bottom_height" value="1" />
 	<border name="title_border" left="10" right="10" top="0" bottom="0" />
+	<border name="button_border" left="0" right="0" top="0" bottom="0"/>
 	<distance name="title_vertical_pad" value="1" />
     <distance name="button_height" value="0"/>
 </frame_geometry>
@@ -101,15 +104,16 @@
 	<distance name="bottom_height" value="0" />
 	<distance name="title_vertical_pad" value="0" />
 	<border name="title_border" left="10" right="10" top="0" bottom="0" />
+	<border name="button_border" left="0" right="0" top="0" bottom="0"/>
     <distance name="button_height" value="0"/>
 </frame_geometry>
 
-<frame_geometry name="modal" title_scale="small" hide_buttons="true" rounded_top_left="1" rounded_top_right="1" parent="small">
+<frame_geometry name="modal" title_scale="small" hide_buttons="true" rounded_top_left="C_border_radius" rounded_top_right="C_border_radius" parent="small">
 	<distance name="title_vertical_pad" value="5"/>
 </frame_geometry>
 
 <!--chromium save dialog-->
-<frame_geometry name="attached" title_scale="small" has_title="false"  hide_buttons="true" rounded_top_left="1" rounded_top_right="1" rounded_bottom_left="0" rounded_bottom_right="0" parent="normal">
+<frame_geometry name="attached" title_scale="small" has_title="false"  hide_buttons="true" rounded_top_left="C_border_radius" rounded_top_right="C_border_radius" rounded_bottom_left="0" rounded_bottom_right="0" parent="normal">
 	<distance name="title_vertical_pad" value="0"/>
 	<distance name="bottom_height" value="1"/>
 	<distance name="left_width" value="1"/>

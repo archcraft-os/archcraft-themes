@@ -1,5 +1,5 @@
 button_offset=2
-button_spacing=4
+button_spacing=2
 
 show_app_icon=true
 
@@ -21,3 +21,5 @@ shadow_delta_width=0
 shadow_delta_x=0
 shadow_delta_y=-5
 shadow_opacity=40
+
+frame_border_top=4
